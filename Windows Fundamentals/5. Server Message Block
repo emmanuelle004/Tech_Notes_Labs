@@ -1,1 +1,94 @@
+Objective:
+Understand how NTFS permissions and share permissions work together on Windows SMB shares, and how misconfigurations lead to compromise.
 
+SMB Basics
+SMB (Server Message Block) is used by Windows to share files, folders, and printers.
+
+Accessed as \\SERVER\Share
+
+Common default shares:
+C$ (C: drive, admin share)
+ADMIN$ (Windows directory, admin)
+IPC$ (named pipes)
+
+SMB is heavily targeted because Windows dominates desktop environments. 
+Many ransomware/malware families spread via weak shares and SMBv1 issues (e.g. EternalBlue).
+
+Difference Between Share Permissions and NTFS Permissions
+
+They are NOT the same:
+
+Share permissions
+-Apply only when accessing a folder over the network via SMB.
+-Set on the share itself (Sharing tab).
+
+Basic levels:
+Read – view files and subfolders.
+Change – read, add, edit, delete.
+Full Control – all of the above plus change share permissions.
+
+NTFS permissions
+-Apply at the file system level (Security tab).
+-Apply both locally (console/RDP) AND over the network.
+-Much more granular (Full Control, Modify, Read/Execute, List, Read, Write, plus advanced special permissions).
+-Inherited from parent folders unless inheritance is disabled.
+
+Key rule to remember:
+
+→ When accessing over SMB, the effective permissions = the most restrictive combination of Share permissions AND NTFS permissions.
+
+Examples:
+
+Share = Everyone: Full Control, NTFS = Read only → user effectively gets Read.
+
+Share = Everyone: Read, NTFS = Full Control → user effectively gets Read.
+
+Local or RDP access (no SMB) → only NTFS permissions matter.
+
+Practical Commands / Tools
+Linux client:
+
+List shares:
+smbclient -L SERVER_IP -U username
+
+Connect to share:
+smbclient "\SERVER_IP\ShareName" -U username
+
+Mount share (requires cifs-utils):
+sudo mount -t cifs -o username=user,password=pass //SERVER_IP/ShareName /mnt/share
+
+Windows host:
+-View existing shares:
+net share
+
+-Manage/view shares:
+Computer Management - Shared Folders - Shares / Sessions / Open Files
+
+-View NTFS permissions:
+File/Folder - Properties - Security
+or
+icacls C:\path\to\folder
+
+Note:
+Windows Defender Firewall can block SMB from untrusted networks.
+
+Workgroup:
+Auth checked against local SAM database.
+
+Domain:
+Auth checked against Active Directory.
+
+If syntax and permissions are correct but access fails: Likely firewall/profile misconfig or wrong auth context.
+
+Security Takeaways
+Misconfigured shares (Everyone: Full Control, wide-open SMB, exposed admin shares) are a classic path for:
+-Lateral movement
+-Data theft
+-Ransomware spread
+NTFS is can be used to enforce least privilege on files/folders.
+
+Always:
+-Treat SMB as high risk; do not expose it directly to the internet.
+-Regularly audit: net share output, shared folders in Computer Management, NTFS ACLs on sensitive directories.
+
+Monitor SMB activity and share access in Event Viewer/SIEM.

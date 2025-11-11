@@ -5,8 +5,8 @@ Key directories on C:\
 
 -C:\ – Root/boot partition, contains core system folders and files.
 -C:\PerfLogs – Used for performance logs; often empty by default but can contain useful data for troubleshooting or analysis.
--C:\Program Files – On 64-bit systems: 64-bit applications.
--C:\Program Files (x86) – 32-bit applications on 64-bit systems.
+-C:\Program Files – On 64-bit systems: 64-bit applications. On 32-bit systems, all 16-bit and 32-bit programs are installed here. 
+-C:\Program Files (x86) – 32-bit and 16-bit programs are installed here on 64-bit editions of Windows.
 -C:\ProgramData – Hidden, machine-wide application data accessible to all users; often used for configs, databases, and service data.
 -C:\Users – User profiles.
 -Default – Template for new user profiles.

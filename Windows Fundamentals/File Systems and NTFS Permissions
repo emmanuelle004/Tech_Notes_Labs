@@ -1,0 +1,117 @@
+Objective:
+Understand common Windows file systems and how NTFS permissions work so I can evaluate access control, misconfigurations, and potential attack paths.
+
+Windows File System Types
+
+FAT12 / FAT16
+-Legacy; not used on modern Windows installations.
+
+FAT32
+-Common on USB drives, SD cards, and older systems.
+-Uses 32-bit entries in the file allocation table.
+Pros:
+-Very compatible across devices (PCs, consoles, cameras, etc.).
+-Works with Windows, macOS, and Linux.
+Cons:
+-Max file size: 4 GB.
+-No built-in permissions, encryption, or journaling.
+-Not suitable for securing sensitive data.
+
+exFAT
+-Designed mainly for flash storage.
+-Better limits than FAT32, widely supported.
+-Also lacks NTFS-style security and journaling.
+
+NTFS (New Technology File System)
+-Default for modern Windows (since Windows NT).
+Pros:
+-Reliable; supports recovery and consistency after failures (journaling).
+-Granular permissions on files and folders.
+-Supports very large partitions and files.
+-Supports features like compression, encryption (EFS), quotas.
+Cons:
+-Not fully supported by many embedded/media devices.
+-Less convenient for pure plug-and-play between all consumer devices.
+
+NTFS Permissions
+
+-Full Control
+Read, write, change permissions, take ownership, delete.
+
+-Modify
+Read, write, delete.
+
+-Read and Execute
+View contents and execute files.
+
+-List Folder Contents
+View and list folders/subfolders (folders only).
+
+-Read and Execute
+View files and list folder contents as well as executing files.
+
+-Write
+Create files/folders and write to files.
+
+-Traverse Folder
+Move through a folder to access a file or subfolder even if listing is not allowed.
+
+Important concepts:
+
+Note:
+-Files and folders usually inherit permissions from their parent.
+-Inheritance can be disabled to set explicit permissions.
+
+Effective access:
+-Determined by combining allow/deny entries from user and group memberships.
+
+Basic access flags often seen:
+F : Full access
+M : Modify
+RX: Read and execute
+R : Read
+W : Write
+D : Delete
+N : No access
+
+Using icacls 
+-icacls allows viewing and modifying NTFS permissions from the command line.
+
+Examples:
+
+View permissions on C:\Windows:
+command = icacls C:\Windows
+
+Sample output line show Which users/groups have which permissions.
+
+Inheritance flags such as:
+(CI): container inherit (subfolders)
+(OI): object inherit (files)
+(IO): inherit only
+(I): inherited from parent
+
+Example: granting a user (joe) full control on C:\Users (non-recursive):
+command = icacls C:\Users /grant joe:F
+
+Example: removing joe’s permissions:
+command = icacls C:\Users /remove joe
+
+Summary:
+
+icacls can:
+-Grant/deny permissions.
+-Control inheritance.
+-Change ownership.
+-It is useful on both standalone machines and in domain environments for fine-grained access control.
+
+Security Takeaway
+
+Choosing NTFS over FAT32/exFAT on Windows systems is essential for:
+-Proper access control
+-Auditing
+-Resilience (journaling)
+
+Misconfigured NTFS permissions can lead to:
+-Unauthorized data access
+-Lateral movement, that is, gmoving from one system to another inside the network, usually reusing or abusing gained crednetials.
+-Privilege escalation, that is, gaining higher permissions on the same system or within the same account context.

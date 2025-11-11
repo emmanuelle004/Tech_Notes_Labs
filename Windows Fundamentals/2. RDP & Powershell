@@ -24,3 +24,14 @@ Used PowerShell’s 'Get-WmiObject' to query Windows Management Instrumentation 
 
 powershell
 Get-WmiObject -Class Win32_OperatingSystem | Select Version, BuildNumber
+
+Security Takeaway
+
+RDP:
+Exposed or weakly protected RDP is a common attack vector (brute force, credential stuffing, lateral movement).
+Proper hardening (VPN, firewall rules, MFA, monitoring logon events) is essential.
+
+OS Enumeration
+Knowing how to quickly identify OS version and build helps:
+Assess patch level and legacy risk.
+Prioritize systems that may be vulnerable (e.g. outdated builds, unsupported versions).

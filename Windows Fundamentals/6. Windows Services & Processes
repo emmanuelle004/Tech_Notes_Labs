@@ -1,1 +1,18 @@
+Services allow for the creation and management of long-running processes.
+Window services can be started at system boot with no intervention and can continue to run in the background even after the user logs out of their account.
+Applications such as network monitoring apps can be created to install as a service.
 
+Within Windows, services are responsible for:
+- networking functions
+- performing system diagnostics
+-managing users credentials
+-controlling Windows updates, etc.
+
+Windows services are managed via the Service Control Manager (SCM) system accessible via:
+-services.msc MMC add-in which provides a GUI interface for displaying, interacting, and managing services.
+-sc.exe using PowerShell cmdlets such as Get-Service.
+
+e.g 
+
+Service statuses = Running, Stopped, or Paused.
+Services can be set to start manually, automatically, or on a delay at system boot.

@@ -1,1 +1,33 @@
+Ethernet is a collection of network protocols/standards.
+
+Network protocols are necessary to ensure interoperability between devices from different vendors or platforms. This results in vendor neutrality. Also, it is useful for
+modularity via layers, that is, upgrade por modify parts without breaking others. Lastly, promotes sacalability and troubleshooting because knowing what each layer/protocol 
+handles lets one isolate faults quickly.
+
+Transmission Types include analog and digital.
+Analog: uses continuous signals to represent information. e.g. In traditional radio broadcasts.
+Digital: uses discrete signals (bits) to encode data.
+
+Transmission Modes: Simplex, Haf-duples, and Full-duplex.
+Simplex: allows one-way communication only where signals travel in a single direction. e.g. keyboard to a computer.
+Half-Duplex: allows two-way communication but not simultaneously
+Full-duplex: allows two-way communication simultaneouly.
+
+Connections between network devices operate at a defined speed measured in bits per second.
+A bit is a vlue represented by either 0 or 1.
+A byte is 8 bits.
+
+1 kilobit (kb) = 1,000 bits
+1 megabit (Mb) = 1,000,000 bits
+1 gigabit (Gb) = 1,000,000,000 bits
+1 terabit (Tb) = 1,000,000,000,000 bits
+
+Ethernet Standards are defined in the IEEE 802.3 standard. (1983)
+IEEE = Institute of Electrical and Electronics Engineers.
+
+Speed    --   Common Name   -- IEEE Standard -- Informal Name -- Max Length
+10 Mbps  --     Ethernet    --   802.3i    -- 10BASE-T        -- 100m
+100 Mbps -- Fast Ethernet   --   802.3u    -- 100BASE-T       -- 100m
+1 Gbps   --   Gig Ethernet  --   802.3ab   -- 1000BASE-T      -- 100m
+10 Gbps  -- 10 Gig Ethernet --   802.3an   -- 10GBASE-T       -- 100m
 

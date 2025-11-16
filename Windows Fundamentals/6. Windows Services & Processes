@@ -16,3 +16,75 @@ e.g
 
 Service statuses = Running, Stopped, or Paused.
 Services can be set to start manually, automatically, or on a delay at system boot.
+
+#Objective:
+Understand how Windows services work, how to manage them (GUI/CLI), and what critical processes do.
+
+#What services are
+Long-running background components that can start at boot and run without an interactive user.
+Managed by the Service Control Manager (SCM).
+
+#Manage services
+GUI: services.msc (MMC snap-in: Name, Description, Status, Startup type, Log On account).
+CLI: sc.exe and PowerShell (Get-Service, Set-Service, New-Service).
+
+#States & startup types
+Status: Running, Stopped, Paused, StartPending, StopPending.
+Startup: Automatic, Automatic (Delayed), Manual, Disabled.
+Admin rights required to create/modify/delete services.
+
+#Built-in service accounts (Log On As)
+LocalSystem (very high privilege)
+LocalService (least privilege, local)
+NetworkService (least privilege with network identity)
+
+#Commands used in powershell.
+List running: Get-Service | ? {$_.Status -eq 'Running'} | Select Name,DisplayName,Status
+Fulle config: Get-CimInstance Win32_Service | Select Name,State,StartMode,StartName,PathName
+Processes: Get-Process | Sort CPU -desc | Select -First 10 Name,Id,CPU
+
+#SCM / CMD
+all services: sc query type= service state= all
+Service config: sc qc <ServiceName>
+Start/Stop: sc start <ServiceName> / sc stop <ServiceName>
+Startup type: sc config <ServiceName> start= disabled
+Security descriptor: sc sdshow <ServiceName> (view DACL/SACL)
+Map processe to services: tasklist /svc
+Remote host: sc \\HOSTNAME query
+
+#Critical system processes
+
+smss.exe — Session Manager; starts csrss.exe & wininit.exe.
+csrss.exe — Client/Server Runtime (user-mode Win32 subsystem).
+wininit.exe — Initializes session 0; launches services.exe (SCM) and lsass.exe.
+services.exe — Service Control Manager.
+lsass.exe — Local Security Authority; logon validation, token creation, policy.
+winlogon.exe — Ctrl+Alt+Del (secure attention), user logon, lock/unlock.
+logonui.exe — Logon screen UI.
+System — Kernel system process.
+svchost.exe — Generic host for services (multiple instances: e.g., RPCSS, DCOM, PnP).
+
+#Sysinternals (no install needed)
+Browse: \\live.sysinternals.com\tools
+Process Explorer (procexp.exe) — process tree, handles/DLLs, parent/child.
+Process Monitor (procmon.exe) — file/registry/network event timeline.
+TCPView — live TCP/UDP endpoints.
+PsExec — remote exec via SMB.
+ProcDump — capture dumps (labs only; often blocked by EDR):
+
+\\live.sysinternals.com\tools\procdump.exe -accepteula -ma <PID> dump.dmp
+
+#Security takeaways
+
+Classic priv-esc via services
+
+Writable binPath or service directory (replace EXE).
+Unquoted service path with spaces (path hijack).
+Over-permissive service DACL (sc sdshow) or folder ACLs (icacls).
+Services running as LocalSystem unnecessarily.
+
+-protection - High-value target. Use Credential Guard / LSA Protection (PPL), disable WDigest cleartext, restrict SeDebugPrivilege.
+
+-Events to monitor
+System: 7045 (service installed), 7036 (state changed), 7040 (startup type changed)
+Security: 4697 (service installed), 4688 (process create), 4672 (special privileges)

@@ -1,0 +1,77 @@
+#Information Security (Info Sec)
+#Pillars of information security.
+
+#What is Information Security?
+Information security is the practice of protecting an invaluable asset from threats (destruction, theft or corruption), while maintaining the 
+asset accessibility to its intended users.
+
+Info sec is holistic, i.e., covers all layers of the system (all parts are interconnected)
+Physical -- Technological -- Policies & Procedures.
+
+#Pillars of Info Sec
+-CIA Triad
+-AAA
+-Non-repudiation
+
+1. Confidentiality
+Information is should be kept secret, i.e., not disclosed or made available to anyone who is not authorized, whether data is in transit or at rest.
+Typical controls: access controls, encryption, database views.
+
+2. Integrity
+Information and systems should not be tampered with and should be modified only by authorized procedures.
+Integrity check: add redundancy to data/messages.
+Techniques: hashing, checksums, MACs.
+
+3. Availability
+Systems, services, and data should be accessible and usable on demand by authorized users or entities.
+Techniques: redundancy, capacity planning, backups & disaster recovery, fault tolerant designs.
+
+4. Authentication
+Verifying the identity of a user/process/device.
+Factors: Something you know, are, have.
+---Desirable properties: 
+a. Unforgeable: an individual shouldn't be able to create a credential or response that a verifier will accept unless they possess the real secret.
+b. Unguessable: The secret should have enough entropy that brute-force or prediction is infeasible.
+c. Revocable: A credential or binding can quickly be invalidated when lost, stolen, or no longer needed.
+
+-Something You Know
+Pros: Simple to implement and understand.
+Cons: Easy to crack (unless strong), might be resused several times.
+OTPs are strong, but difficult to remember all of them.
+
+-Something You Have: suthentication strength depends on difficulty of forging.
+E.g. OTP Cards(e.g. Secure ID) generates new password each time user logs in, Smard Card: tamper-resistant, stores secret info, entered into a card-reader,
+Token/key(i.e. iButton), ATM card.
+
+-Something You Are
+Pros: raises the bar.
+Cons: key management, social acceptance, false positive (authentic user rejected), false negative (imposter accepted).
+
+2FA:Verifies idendity based on 2 different authentication factors.
+
+--Who authenticates who? 
+-Person-to-computer
+-Computer-to-computer
+
+Types of authentication (e.g. SSL)
+-Client: server verifies cleint's ID
+-Server: client verifies serves's ID
+-Mutual: Client and server verify each other.
+
+Note: Authenticated user is referred to as 'principal'.
+
+5. Authorization
+Verifies whether a user has permission to conduct or perform some action on some resource.
+Authority: what the pprincipal is allowed to do.
+-ACL: Mechanism used by many OSs to determine whether users are authorized to conduct/perform certain actions.
+
+6. Accountability
+Record the actions of a user (what, where, where).
+-Uses logging and audit trails.
+Requirements: secure timestamping(OS & network), data integrity in logs and audit trails (one should not be able to modifiy trails or changes in trails should be detected)
+
+7. Non-Repudiation
+Undeniability of a transaction i.e. a party cannot credibly deny a specific action.
+-Generate digitally signed statements 9evidence/receipts).
+
+

@@ -14,7 +14,7 @@ Physical -- Technological -- Policies & Procedures.
 -Non-repudiation
 
 1. Confidentiality
-Information is should be kept secret, i.e., not disclosed or made available to anyone who is not authorized, whether data is in transit or at rest.
+Information should be kept secret, i.e., not disclosed or made available to anyone who is not authorized, whether data is in transit or at rest.
 Typical controls: access controls, encryption, database views.
 
 2. Integrity
@@ -39,7 +39,7 @@ Pros: Simple to implement and understand.
 Cons: Easy to crack (unless strong), might be resused several times.
 OTPs are strong, but difficult to remember all of them.
 
--Something You Have: suthentication strength depends on difficulty of forging.
+-Something You Have: authentication strength depends on difficulty of forging.
 E.g. OTP Cards(e.g. Secure ID) generates new password each time user logs in, Smard Card: tamper-resistant, stores secret info, entered into a card-reader,
 Token/key(i.e. iButton), ATM card.
 
@@ -66,7 +66,7 @@ Authority: what the pprincipal is allowed to do.
 -ACL: Mechanism used by many OSs to determine whether users are authorized to conduct/perform certain actions.
 
 6. Accountability
-Record the actions of a user (what, where, where).
+Record the actions of a user (what, where, when).
 -Uses logging and audit trails.
 Requirements: secure timestamping(OS & network), data integrity in logs and audit trails (one should not be able to modifiy trails or changes in trails should be detected)
 

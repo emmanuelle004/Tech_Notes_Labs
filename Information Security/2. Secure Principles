@@ -1,1 +1,43 @@
+#Security Principles
 
+1. Defense in Depth
+One should not rely on a single protection mechanism, since they are all inclined to fail i.e. defenses should be complementary (preventive, detective, reponsive).
+Best practice: use a layer of defenses which limit the chance of initial foothold escalate into the full compromise.
+
+2. Fail-Safe Defaults
+Absence of explicit permission is equivalent to no permission.
+Best practice: Systems should be secure "out-of-the-box".
+
+3. Secure the Weakest Link
+A system is only as strong as its weakest link (most vulnerable, easy to attack).
+Best practice: Identify and harden third-party/trust boundaries.
+
+4. Complete Mediation
+Every access to every resource must be checked for authorization.
+Best practice: Check permissions on every use.
+
+5. Open Design
+A system should be secure even if the adversary knows everything about its design and implementation.
+Best practice: Use public, well-analyzed primitves and assume adversaries know your design.
+
+6. Separation of Privilege
+Privilege, or authority should only be granted to subjects who require it. 
+Best practice: Require independent approvals or multi-factor controls where high-impact actions occur.
+
+7. Least Prrivilege
+Subject should possess only the required level of privilege required to perform a specific task or duty.
+Best Practice: Fine-grained roles and auditing privileged access.
+
+8. Work Factor - how much work an attacker has to do(time, computation, money, skill) to break a system.
+Increase the difficulty of mounting attacks. E.g. incorporate non-determinism/randomness (system behaves less predictably e.g. ASLR), 
+in crypto: increase key length.
+Best practice: long keys, salted hash, or rate limits while balancing with usability.
+Drawback: Decreases usability.
+
+9. Compromise Reading
+Concede(understand) that attacks will occur, but record the fact.
+Best practice: loggign and retention need to be paired with monitoring and response playbooks.
+
+10. Logging
+Log everything.
+Best practice: Design tamper-evident, remote, and redundant logging pipelines and practice log-driven incident response/

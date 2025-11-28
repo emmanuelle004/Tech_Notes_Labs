@@ -1,0 +1,86 @@
+#Threat Modeling
+
+#Threat (what could happen)
+Any potential or actual event that undermines one or more security prorperties of a system.
+Or anything that has the potential to cause harm or damage to an asset.
+Common threats: snopping, MITM, spoofing, repudiation, denial of receipt, delay, DoS.
+
+#Vulnerability (what lets it happen)
+Any weakness in a system or code that could be leveraged to compromise security properties of a resource in a system.
+Cause: flaws in design, implementation, config, procedural(human)
+E.g. Buffer overflow, RCE, XSS, SQLi, No encryption, etc.
+There exist known (disclosed, patched) vulnerabilites and zero-day(undisclosed, unpatched)
+OVAL (Open Vulnerability and Assessment Language) is a public, standardized language + repository for expressing vulnerability and configuration checks so tools can 
+automatically determine if a system is vulnerable.
+
+#Exploit
+Code or procedures that can be leverages a vulnerability to compromise a system's security.
+
+#Threat Modeling
+Systematic identification of threats faced by a system.
+Asset enumeration (Invaluable assets you want to protect) --> Attack Surface enumeration (possible threats and entry points) 
+--> Mapping (Attackers to assets & Attackers to attack surfaces) --> Surveying mitigation (countermeasures) --> Balance costs vs risks.
+
+#Threat Modeling Approaches
+1. Attacker-Centric ( Who are the adversaries, Wwat do they want, How will they strike)
+2. System-Centric (How vulnerable is the system, what can attacks achieve)
+3. Asset-Centric (What is there to protect, What would hurt me)
+
+Key Considerations for Attakcs
+1. When? Before, During, After
+2. Where? Local or Remote
+3. How? Passive or Active
+
+Threat Modeling Methodologies
+-STRIDE/DREAD from Mircrosoft (Attacker-centric)
+-Process for Attack Simulation and Threat Analysis (PASTA)
+-Trike
+-Visual, Agile, and Simple Threat (VAST) modeling
+-AS/NZS 4360:2004 Rosk Management
+-OCTAVE
+
+1. STRIDE - Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege
+
+--Spoofing: pretending to be someone/something else.
+Property broken: authentication. E.g. To authenticate principals: cookie auth, Kerberos auth, PKI systems like SSL/TLS and certificates, 
+To auth code or data: digital signatures.
+
+--Tampering: maliciously modifying data or code.
+Property broken: integrity. E.g. ACLs, Digital signatures.
+
+--Repudiation: being able to deny an action because there is no reliable logging/proof.
+Property broken: non-repudiation. E.g. Secure logging and auditing, digital signatures.
+
+--Information Disclosure: Unauthorized read of data.
+Property broken: confidentiality. E.g. Encryption, ACLs
+
+--Denial of Service: Making a service unavailable or too slow to use.
+Property broken: Availability. E.g. ACLs, filtering, quotas.
+
+--Elevation of privilege: going fron low privilege (e.g. normal user) to higher privilege (e.g. root)
+Property broken: Authorization. E.g. ACLs, group or role membership, privilege ownership, input validation.
+
+2. OWASP Threat Modeling (Application-centric but usable in other settings).
+a. Decompose the app: understand the app and how it interacts with external entities.
+Involves: creating uses cases, identifying entry points, assests, and trust levels.
+Use Data Flow Diagrams (DFDs) to show how data flows within the system - are helpful in the 2nd step to identify potential threat targets from the attacker's
+perspective.
+
+b. Identify, categorize, and rank threats - from attacker (STRIDE) and defender (ASF) standpoint.
+Application Security Frame (ASF): threat categorization focused on: Auditing & Logging, Authentication, Authorization, Config Managment, 
+Data Protection in Storage & Transit, Data Validation, and Exception Mananagement.
+
+##DREAD Risk Assessment Model
+Method used to rate and prioritize threats by scoring how bad they are across five dimensions.
+(D = Damage Potential) + (R = Reproduceability) + ( E = Exploitability) + (A = Affected Users) + (D = Discoverability) / 5 = DREAD score
+
+c. Determine countermeasures and mitigations (accept, eliminate, mitigate).
+Rank threats (evaluate business impact they pose) and priroritize mitigations.
+
+#Threat Analysis
+Risk = Probability threat occurs * Cost to organization
+
+
+
+
+

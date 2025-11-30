@@ -24,7 +24,7 @@ Best practice: Use public, well-analyzed primitves and assume adversaries know y
 Privilege, or authority should only be granted to subjects who require it. 
 Best practice: Require independent approvals or multi-factor controls where high-impact actions occur.
 
-7. Least Prrivilege
+7. Least Privilege
 Subject should possess only the required level of privilege required to perform a specific task or duty.
 Best Practice: Fine-grained roles and auditing privileged access.
 

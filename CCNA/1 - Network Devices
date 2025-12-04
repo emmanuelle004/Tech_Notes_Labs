@@ -6,12 +6,12 @@ Basic definitions
 4. Client is a node that accesses services or functionalities made available by a server. 
 
 Network devices:
-1. Switch are Layer 2 devices that connect multiple devices in a local area network(LAN). Switches forward frames based on the MAC addresses of the devices.
+1. Switches are Layer 2 devices that connect multiple devices in a local area network(LAN). Switches forward frames based on the MAC addresses of the devices.
 e.g. Cisco Catalyst 9200 Switch.
 
 Characteristics of switches:
 -Have many network interfaces/ports for end hosts connections. (usually 24+)
--Provide connectivity to hosts within the same LAN)
+-Provide connectivity to hosts within the same LAN
 -Do not provide connectivity between LANs
 
 2. Routers are Layer 3 devices that forward packets between different networks or subsets. Routers forward packets based on IP addresses.
@@ -22,7 +22,7 @@ Characteristics of routers:
 -Are used to provide connectivity between LANs.
 Used to send data over the internet.
 
-3. Firewalls are security devices (hardware or software_ that monitor and control network traffic based on a set of pre-defined rules, that is, they filter 
+3. Firewalls are security devices (hardware or software) that monitor and control network traffic based on a set of pre-defined rules, that is, they filter 
 traffic between networks.
 e.g. ASA5500-X, Firepower 2100.
 
